@@ -7,7 +7,7 @@ const UserType = new GraphQLObjectType({
   description: "User type",
   fields: () => ({
     id: { type: GraphQLID },
-    username: { type: GraphQLString },
+    userName: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
   }),
@@ -18,12 +18,7 @@ const PostType = new GraphQLObjectType({
   description: "Post type",
   fields: () => ({
     id: { type: GraphQLID },
-    userID: {
-      type: UserType,
-      resolve(parent, args) {
-        return User.findOne({ where: { id: parent.userID } });
-      },
-    },
+    userID: { type: GraphQLID },
     title: { type: GraphQLString },
     body: { type: GraphQLString },
   }),

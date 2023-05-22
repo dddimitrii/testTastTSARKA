@@ -1,19 +1,16 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const authenticate = async (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1] || ""
+  const token = req.headers.authorization?.split(" ")[1] || "";
 
   try {
-    const verified = jwt.verify(token, process.env.JWT_SECRET)
-    // const decoded = jwt.decode(token, process.env.JWT_SECRET)
-    req.verifiedUser = verified.user
-    console.log("Verification success!", verified)
-    next()
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    req.verifiedUser = verified.user;
+    next();
   } catch (err) {
-    console.log("Verification failed!", err)
-    next()
+    next();
   }
-}
+};
 
-module.exports = { authenticate }
+module.exports = { authenticate };

@@ -1,11 +1,14 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const cors = require("cors");
+const { authenticate } = require("./src/middleware/checkAuth");
 const schema = require("./src/graphql/schema");
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
+
+app.use(authenticate);
 
 app.use(
   "/graphql",
